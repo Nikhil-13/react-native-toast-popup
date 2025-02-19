@@ -6,9 +6,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nikhil-13",
   "license": "ISC",
-  "description": "",
+  "description": "A React Native wrapper for creating animated floating pop-up messages with customizable swipe gestures. Supports multiple swipe directions with custom callback actions, offering a smooth and interactive user experience.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nikhil-13/react-native-toast-popup"
+  },
+  "bugs": {
+    "url": "https://github.com/Nikhil-13/react-native-toast-popup/issues"
+  },
+  "homepage": "https://github.com/Nikhil-13/react-native-toast-popup#readme",
   "peerDependencies": {
     "react": ">=17.0.0",
     "react-native": ">=0.73.0",
