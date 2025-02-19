@@ -159,7 +159,7 @@ export default ({
     transform: [
       { translateY: translateY.value },
       { translateX: translateX.value },
-    ],
+    ] as const,
   }));
 
   return (
