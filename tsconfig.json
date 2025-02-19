@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "ESNext",
+    "target": "ES6",
+    "lib": ["ESNext"],
+    "jsx": "react-native",
+    "declaration": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "example"]
+}
