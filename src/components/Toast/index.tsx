@@ -27,7 +27,7 @@ interface Props {
   disabledSwipeDirection?: Direction[];
 }
 
-const ToastMessage = ({
+export default ({
   children,
   containerStyle,
   onLeftSwipe,
@@ -170,8 +170,6 @@ const ToastMessage = ({
     </GestureDetector>
   );
 };
-
-export default ToastMessage;
 
 const styles = StyleSheet.create({
   root: { position: "absolute", overflow: "hidden", width: "100%" },

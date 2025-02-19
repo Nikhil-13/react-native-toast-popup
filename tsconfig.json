@@ -6,7 +6,9 @@
     "lib": ["ESNext"],
     "jsx": "react-native",
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports":true
   },
   "exclude": ["node_modules", "example"]
 }
