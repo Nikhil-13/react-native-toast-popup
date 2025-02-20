@@ -8,6 +8,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
+import { defaultStyles } from "./styles";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -20,6 +21,7 @@ interface Props {
   onLeftSwipe?: () => void;
   onRightSwipe?: () => void;
   onUpSwipe?: () => void;
+  hideToastCallback?: () => void;
   onDownSwipe?: () => void;
   swipeThreshold?: number;
   initialDirection?: Direction;
@@ -27,12 +29,13 @@ interface Props {
   disabledSwipeDirection?: Direction[];
 }
 
-export default ({
+const ToastMessage = ({
   children,
   containerStyle,
   onLeftSwipe,
   onRightSwipe,
   onUpSwipe,
+  hideToastCallback,
   onDownSwipe,
   swipeThreshold = 100,
   initialDirection = "bottom",
@@ -57,7 +60,7 @@ export default ({
     // Animate into place with spring effect
     translateX.value = withSpring(0, { damping: 15, stiffness: 100 });
     translateY.value = withSpring(0, { damping: 15, stiffness: 100 });
-  }, []);
+  }, [initialDirection]);
 
   // Memoized swipe completion callback
   const onSwipeComplete = useCallback(
@@ -71,12 +74,14 @@ export default ({
       } else if (direction === "bottom") {
         onDownSwipe?.();
       }
+      hideToastCallback?.();
     },
     [onLeftSwipe, onRightSwipe, onUpSwipe, onDownSwipe]
   );
 
   // Gesture handling
   const pan = Gesture.Pan()
+    .minDistance(swipeThreshold / 2) // Ignore minor drags
     .onChange((event) => {
       if (!disabledSwipeDirection.includes("left") && event.translationX < 0) {
         translateX.value = event.translationX;
@@ -164,13 +169,13 @@ export default ({
 
   return (
     <GestureDetector gesture={pan}>
-      <Animated.View style={[styles.root, animatedStyles, containerStyle]}>
+      <Animated.View
+        style={[defaultStyles.root, animatedStyles, containerStyle]}
+      >
         {children}
       </Animated.View>
     </GestureDetector>
   );
 };
 
-const styles = StyleSheet.create({
-  root: { position: "absolute", overflow: "hidden", width: "100%" },
-});
+export default ToastMessage;
