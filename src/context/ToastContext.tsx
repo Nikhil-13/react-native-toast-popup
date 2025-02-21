@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import ToastMessage from "../components/Toast";
 
-type Direction = "left" | "right" | "up" | "bottom";
+type Direction = "left" | "right" | "up" | "down";
 
 type ToastProps = {
   id: string; // Unique ID for each swipe instance

@@ -13,7 +13,7 @@ import { defaultStyles } from "./styles";
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-type Direction = "left" | "right" | "up" | "bottom";
+type Direction = "left" | "right" | "up" | "down";
 
 interface Props {
   children?: ReactNode;
@@ -38,7 +38,7 @@ const ToastMessage = ({
   hideToastCallback,
   onDownSwipe,
   swipeThreshold = 100,
-  initialDirection = "bottom",
+  initialDirection = "down",
   animateOutDuration = 500,
   disabledSwipeDirection = [],
 }: Props) => {
@@ -53,7 +53,7 @@ const ToastMessage = ({
       translateX.value = SCREEN_WIDTH;
     } else if (initialDirection === "up") {
       translateY.value = -SCREEN_HEIGHT;
-    } else if (initialDirection === "bottom") {
+    } else if (initialDirection === "down") {
       translateY.value = SCREEN_HEIGHT;
     }
 
@@ -71,7 +71,7 @@ const ToastMessage = ({
         onRightSwipe?.();
       } else if (direction === "up") {
         onUpSwipe?.();
-      } else if (direction === "bottom") {
+      } else if (direction === "down") {
         onDownSwipe?.();
       }
       hideToastCallback?.();
@@ -95,7 +95,7 @@ const ToastMessage = ({
       if (!disabledSwipeDirection.includes("up") && event.translationY < 0) {
         translateY.value = event.translationY;
       } else if (
-        !disabledSwipeDirection.includes("bottom") &&
+        !disabledSwipeDirection.includes("down") &&
         event.translationY > 0
       ) {
         translateY.value = event.translationY;
@@ -120,10 +120,10 @@ const ToastMessage = ({
       ) {
         exitDirection = "up";
       } else if (
-        !disabledSwipeDirection.includes("bottom") &&
+        !disabledSwipeDirection.includes("down") &&
         event.translationY > swipeThreshold
       ) {
-        exitDirection = "bottom";
+        exitDirection = "down";
       }
 
       if (exitDirection) {
@@ -146,11 +146,11 @@ const ToastMessage = ({
             { duration: animateOutDuration },
             () => runOnJS(onSwipeComplete)("up")
           );
-        } else if (exitDirection === "bottom") {
+        } else if (exitDirection === "down") {
           translateY.value = withTiming(
             SCREEN_HEIGHT,
             { duration: animateOutDuration },
-            () => runOnJS(onSwipeComplete)("bottom")
+            () => runOnJS(onSwipeComplete)("down")
           );
         }
       } else {
