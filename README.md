@@ -66,6 +66,10 @@ const MyComponent = () => {
   );
 };
 ```
+## Demo
+
+![Simulator Screen Recording - iPhone 16 - 2025-02-21 at 22 42 20 (1)](https://github.com/user-attachments/assets/c907c593-436d-4e35-965e-6c783b4644ed)
+
 
 ## Props
 
