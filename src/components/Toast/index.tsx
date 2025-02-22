@@ -5,7 +5,6 @@ import Animated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { defaultStyles } from "./styles";
@@ -25,6 +24,7 @@ interface Props {
   onDownSwipe?: () => void;
   swipeThreshold?: number;
   initialDirection?: Direction;
+  animateInDuration?: number;
   animateOutDuration?: number;
   disabledSwipeDirection?: Direction[];
 }
@@ -39,6 +39,7 @@ const ToastMessage = ({
   onDownSwipe,
   swipeThreshold = 100,
   initialDirection = "down",
+  animateInDuration = 500,
   animateOutDuration = 500,
   disabledSwipeDirection = [],
 }: Props) => {
@@ -57,9 +58,9 @@ const ToastMessage = ({
       translateY.value = SCREEN_HEIGHT;
     }
 
-    // Animate into place with spring effect
-    translateX.value = withSpring(0, { damping: 15, stiffness: 100 });
-    translateY.value = withSpring(0, { damping: 15, stiffness: 100 });
+    // Animate into place
+    translateX.value = withTiming(0, { duration: animateInDuration });
+    translateY.value = withTiming(0, { duration: animateInDuration });
   }, [initialDirection]);
 
   // Memoized swipe completion callback

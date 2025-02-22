@@ -11,7 +11,6 @@ type ToastProps = {
   swipeThreshold?: number;
   animateOutDuration?: number;
   disabledSwipeDirection?: Direction[];
-  onSwipeComplete?: () => void;
   onLeftSwipe?: () => void;
   onRightSwipe?: () => void;
   onUpSwipe?: () => void;
