@@ -9,6 +9,7 @@ type ToastProps = {
   containerStyle?: object;
   initialDirection?: Direction;
   swipeThreshold?: number;
+  animateInDuration?: number;
   animateOutDuration?: number;
   disabledSwipeDirection?: Direction[];
   onLeftSwipe?: () => void;
